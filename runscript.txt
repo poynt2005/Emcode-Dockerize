@@ -6,4 +6,4 @@ docker run \
     -v <path/to/your/source_code>:/src \
     -e CODE_PASSWORD=<yourpassword> \
     -d \
-    tmp
+    poynt2005/emcode
