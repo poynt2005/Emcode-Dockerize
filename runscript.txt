@@ -1,0 +1,9 @@
+docker run \
+    --rm \
+    -p <your_code_server_port>:8080 \
+    -v <path/to/your/userdata>:/userdata \
+    -v <path/to/your/extensions>:/extensions \
+    -v <path/to/your/source_code>:/src \
+    -e CODE_PASSWORD=<yourpassword> \
+    -d \
+    tmp
