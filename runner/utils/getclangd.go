@@ -235,6 +235,13 @@ func GetClangd() error {
 		}
 
 	} else if info.IsDir() {
+		
+		if clangdExecutablePath := findClangDFromTargetDir(CHECK_CLANGD_INSTALL_PATH); len(clangdExecutablePath) > 0 {
+			if err := shellExecutor([]string{"ln", "-sf", clangdExecutablePath, "/usr/bin/clangd"}); err == nil {
+				return nil
+			}
+		}
+
 		if err := os.RemoveAll(clangdInstallPath); err != nil {
 			return errors.New("ClearOldAssetsFailed")
 		}
