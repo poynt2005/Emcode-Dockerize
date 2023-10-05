@@ -2,9 +2,14 @@
 
 ## 動機
 
-由於最近比較常用到 [emscription](https://github.com/emscripten-core/emscripten) 來製作 wasm 的相關程序  
-有鑒於 docker 可以快速部署所需環境，並就想結合 [code-server](https://github.com/coder/code-server) 與 emscription 來進行快速開發  
-並有了構建這個容器的想法
+~~由於最近比較常用到 [emscription](https://github.com/emscripten-core/emscripten) 來製作 wasm 的相關程序~~  
+~~有鑒於 docker 可以快速部署所需環境，並就想結合 [code-server](https://github.com/coder/code-server) 與~~ ~~emscription 來進行快速開發~~  
+~~並有了構建這個容器的想法~~
+
+## WASI 分支
+
+本鏡像構建自 ubuntu 基礎鏡像，安裝 wasi-sdk，並將 /opt/wasi-sdk/bin 設為 PATH 環境變量  
+要開發 wasi 程序的時候請使用 clang/clang++ 進行編譯
 
 ## 特色
 
@@ -12,7 +17,7 @@
    - 可自動安裝 clangd(C/C++ 插件), Prettier(前端插件), MS-Python(python 插件) 等實用插件
    - 可自動設定 format on save 功能
    - 可自動將預設主題設為深色
-2. 可直接使用 emscription sdk 工具鏈
+2. ~~可直接使用 emscription sdk 工具鏈~~ 可直接使用 wasi-sdk 工具鏈
 3. 結合 vscode
 
 ## 使用
@@ -25,7 +30,7 @@
 1. your_code_server_port 就是你想開給 code-server 的 port
 2. path/to/your/userdata 用於存放 vscode 用戶資料的卷宗
 3. path/to/your/extensions 用於存放 vscode 所安裝之插件的卷宗
-4. path/to/your/source_code 由於 emscription 的[官方鏡像](https://hub.docker.com/r/emscripten/emsdk) 是使用 /src 作為工作目錄，因為本容器使用 emscription 的官方鏡像作為基底鏡像，故這邊卷宗的映射也是使用 /src，這邊存放的是你的源碼數據
+4. path/to/your/source_code 由於 emscription 的[官方鏡像](https://hub.docker.com/r/emscripten/emsdk) 是使用 /src 作為工作目錄，因為本容器使用 emscription 的官方鏡像作為基底鏡像，故這邊卷宗的映射也是使用 /src，這邊存放的是你的源碼數據，<span style="color: red"> 本分支還是使用 /src 作為程序存放目錄 </span>
 5. yourpassword 就是 code-server 的密碼，預設 admin
 
 ## 備註

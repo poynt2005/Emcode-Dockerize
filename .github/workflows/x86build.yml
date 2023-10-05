@@ -2,20 +2,22 @@ name: x86build
 on:
   push:
     branches:
-      - master
+      - wasi
 jobs:
   auto_build:
     name: Auto Build x86/Linux images
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
+        with:
+          ref: "wasi"
       - name: build docker
         env:
           DOCKERUSR: ${{ secrets.DOCKERUSR }}
         run: |
           echo "Build Docker"
-          docker build -t ${DOCKERUSR}/emcode:latest -f dockerfile .
+          docker build -t ${DOCKERUSR}/emcode:wasi -f dockerfile .
       - name: push to docker hub
         env:
           DOCKERUSR: ${{ secrets.DOCKERUSR }}
@@ -24,4 +26,4 @@ jobs:
           echo "Docker Hub login"
           docker login --username ${DOCKERUSR} --password ${DOCKERPASS}
           echo "Push image"
-          docker push ${DOCKERUSR}/emcode:latest
+          docker push ${DOCKERUSR}/emcode:wasi
