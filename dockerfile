@@ -39,4 +39,7 @@ WORKDIR /src
 
 EXPOSE 8080
 
+COPY startscript.sh /startscript.sh
+RUN chmod +x /startscript.sh
+
 CMD ["/progress/runner"]
